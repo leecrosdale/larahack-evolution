@@ -60,4 +60,12 @@ class User extends Authenticatable
         return $this->belongsTo(Clan::class);
     }
 
+    public function supplies() {
+        return $this->hasMany(UserSupply::class);
+    }
+
+    public function location() {
+        return $this->belongsTo(Location::class);
+    }
+
 }

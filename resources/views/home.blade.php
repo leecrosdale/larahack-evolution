@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Dashboard</div>
 
@@ -14,7 +14,27 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <div class="row">
+                        <buildings-component></buildings-component>
+                    </div>
+
+
+                    <div class="row">
+
+                        <stats-component></stats-component>
+
+                        <supply-component></supply-component>
+
+
+                    </div>
+
+                </div>
+
+
+
+
+
+
                 </div>
             </div>
         </div>

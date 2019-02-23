@@ -17,4 +17,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => ['web']], function () {
+    Route::get('home', 'HomeController@index')->name('home');
+
+    Route::resource('locations', 'LocationController');
+    Route::resource('buildings', 'BuildingController');
+    Route::resource('clans', 'ClanController');
+
+});
