@@ -1,39 +1,37 @@
 <template>
-    <div class="col-md-6 table-responsive" >
+    <div class="col-md-12 table-responsive" >
 
 
-        <h2>Stats</h2>
 
-        <table class="table table-striped">
-            <tr>
-                <th>Building</th>
-                <th>Level</th>
-                <th>Timer</th>
-                <th>Work</th>
-            </tr>
-
-            <tr v-for="building in buildings">
-                <td>
-                    {{ building.name }}
-                </td>
-            </tr>
-
-        </table>
     </div>
 </template>
 
 <script>
+    import { mapActions, mapGetters } from 'vuex'
+
     export default {
         created() {
-
+            this.getBuildings();
+        },
+        components: {
         },
         data(){
             return {};
         },
-        computed: {
-            buildings() {
-                return this.$store.state.buildings;
+        methods: {
+            ...mapActions([
+                'getBuildings'
+            ]),
+            work(building) {
+                axios.post('api/buildings/work', building).then((response) => {
+                   console.log(response.data);
+                });
             }
+        },
+        computed: {
+            ...mapGetters([
+                'buildings'
+            ])
         }
     }
 </script>

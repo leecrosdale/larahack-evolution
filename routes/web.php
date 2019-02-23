@@ -23,6 +23,10 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::resource('locations', 'LocationController');
     Route::resource('buildings', 'BuildingController');
+
+//    Route::get('buildings/{building}/work', 'UserBuildingController@work')->name('user.building.work');
+    Route::get('buildings/{building}/upgrade', 'UserBuildingController@upgrade')->name('user.building.upgrade');
+
     Route::resource('clans', 'ClanController');
 
 });

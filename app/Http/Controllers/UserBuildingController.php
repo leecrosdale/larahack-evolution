@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Repository\Work;
 use App\UserBuilding;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserBuildingController extends Controller
 {
@@ -16,6 +18,15 @@ class UserBuildingController extends Controller
     {
         //
     }
+
+    public function work(UserBuilding $building) {
+
+        $work = new Work();
+        $work->doWork($building, Auth::user());
+
+        return back();
+    }
+
 
     /**
      * Show the form for creating a new resource.

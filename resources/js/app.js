@@ -9,6 +9,9 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import VueCountdownTimer from 'vuejs-countdown-timer'
+Vue.use(VueCountdownTimer);
+
 import { store } from './store.js';
 
 /**

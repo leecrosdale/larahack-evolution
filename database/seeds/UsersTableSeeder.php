@@ -25,7 +25,7 @@ class UsersTableSeeder extends Seeder
 
             $ages = \App\Age::where('order', '<=', $user->age->order)->get();
 
-            $buildings = \App\Building::whereIn('id', $ages->pluck('id'))->get();
+            $buildings = \App\Building::whereIn('age_id', $ages->pluck('id'))->get();
             foreach ($buildings as $building) {
                 $amount = random_int(0,5);
                 if ($amount) {

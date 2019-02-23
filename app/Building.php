@@ -18,4 +18,8 @@ class Building extends Model
         return $this->belongsTo(Age::class);
     }
 
+    public function requirements() {
+        return $this->hasMany(BuildingRequirement::class);
+    }
+
 }

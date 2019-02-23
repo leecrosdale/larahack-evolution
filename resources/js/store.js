@@ -15,6 +15,18 @@ export const store = new Vuex.Store({
         setBuildings(state, buildings) {
             state.buildings = buildings;
         }
+    },
+    getters: {
+      buildings: state => {
+          return state.buildings;
+      }
+    },
+    actions: {
+        getBuildings(state) {
+            axios.get('/api/buildings').then((response) => {
+                state.commit('setBuildings', response.data.data)
+            });
+        }
     }
 })
 

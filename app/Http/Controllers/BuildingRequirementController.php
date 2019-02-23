@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\UserBuilding;
-use App\Http\Resources\UserBuildingResource;
-use App\User;
+use App\BuildingRequirement;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class BuildingController extends Controller
+class BuildingRequirementController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +14,8 @@ class BuildingController extends Controller
      */
     public function index()
     {
+        //
     }
-
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -46,10 +41,10 @@ class BuildingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Building  $building
+     * @param  \App\BuildingRequirement  $buildingRequirement
      * @return \Illuminate\Http\Response
      */
-    public function show(Building $building)
+    public function show(BuildingRequirement $buildingRequirement)
     {
         //
     }
@@ -57,10 +52,10 @@ class BuildingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Building  $building
+     * @param  \App\BuildingRequirement  $buildingRequirement
      * @return \Illuminate\Http\Response
      */
-    public function edit(Building $building)
+    public function edit(BuildingRequirement $buildingRequirement)
     {
         //
     }
@@ -69,10 +64,10 @@ class BuildingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Building  $building
+     * @param  \App\BuildingRequirement  $buildingRequirement
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Building $building)
+    public function update(Request $request, BuildingRequirement $buildingRequirement)
     {
         //
     }
@@ -80,10 +75,10 @@ class BuildingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Building  $building
+     * @param  \App\BuildingRequirement  $buildingRequirement
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Building $building)
+    public function destroy(BuildingRequirement $buildingRequirement)
     {
         //
     }

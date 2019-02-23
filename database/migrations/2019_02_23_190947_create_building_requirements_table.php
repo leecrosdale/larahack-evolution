@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserBuildingsTable extends Migration
+class CreateBuildingRequirementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,16 @@ class CreateUserBuildingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_buildings', function (Blueprint $table) {
+        Schema::create('building_requirements', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
             $table->unsignedInteger('building_id');
-            $table->unsignedInteger('level');
-            $table->unsignedInteger('health');
-            $table->unsignedInteger('max_health');
-            $table->dateTime('next_work')->nullable();
-
+            $table->unsignedInteger('supply_id');
+            $table->unsignedInteger('multiplier')->default(1);
+            $table->unsignedInteger('amount')->default(1);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('building_id')->references('id')->on('buildings');
-
+            $table->foreign('supply_id')->references('id')->on('supplies');
         });
     }
 
@@ -37,6 +33,6 @@ class CreateUserBuildingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_buildings');
+        Schema::dropIfExists('building_requirements');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserBuildingResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,6 +19,8 @@ class HomeController extends Controller
 
         $user = Auth::user();
 
-        return view('home', compact('user'));
+        $buildings = $user->user_buildings()->with('building')->get();
+
+        return view('home', compact(['user','buildings']));
     }
 }

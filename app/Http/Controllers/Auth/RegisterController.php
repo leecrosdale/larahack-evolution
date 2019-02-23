@@ -76,7 +76,8 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'last_login' => Carbon::now()->toDateTimeString(),
             'location_id' => $data['starting_location'],
-            'age_id' => Age::where('is_starting_age',true)->first()->id
+            'age_id' => Age::where('is_starting_age',true)->first()->id,
+            'api_token' => str_random(100)
         ]);
     }
 

@@ -29,7 +29,8 @@ $factory->define(App\User::class, function (Faker $faker) {
         'strength' => random_int(1,100),
         'stamina' => random_int(1,100),
         'location_id' => \App\Location::all()->random(1)->first()->id,
-        'age_id' => \App\Age::all()->random(1)->first()->id
+        'age_id' => \App\Age::all()->random(1)->first()->id,
+        'api_token' => str_random(100)
     ];
 });
 

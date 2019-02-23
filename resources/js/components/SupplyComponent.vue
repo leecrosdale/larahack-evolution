@@ -3,14 +3,14 @@
 
 
         <div class="col-md-6">
-            <h2>Supply</h2>
+            <h2>Supply Totals</h2>
 
             <table class="table table-striped">
                 <tr>
                     <th>Supply</th>
                     <th>Value</th>
                 </tr>
-                <tr v-for="supply in user.supplies">
+                <tr v-for="supply in user.user_supplies">
                     <td>
                         {{ supply.supply.name }}
                     </td>

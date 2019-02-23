@@ -90,7 +90,9 @@
     </div>
 
 <script>
-    window.User = {!! Auth::user()->with(['age','location','supplies', 'supplies.supply'])->first() !!}
+    @auth
+    window.User = {!! \App\User::where('id',\Illuminate\Support\Facades\Auth::user()->id)->with(['age','location','user_supplies', 'user_supplies.supply'])->first() !!}
+    @endauth
 </script>
 
 </body>

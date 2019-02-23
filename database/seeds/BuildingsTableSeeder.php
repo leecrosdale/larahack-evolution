@@ -12,27 +12,17 @@ class BuildingsTableSeeder extends Seeder
     public function run()
     {
 
-        $stone_age = \App\Age::where('slug', 'stone-age')->first();
 
-        \App\Building::create([
 
-            'name' => 'Hut',
-            'slug' => 'hut',
-            'type' => 'house',
-            'age_id' => $stone_age->id
+        factory(\App\Building::class, 15)->create()->each(function ($building) {
 
-        ]);
+            $types = \App\Supply::inRandomOrder()->limit(rand(1,4))->get();
 
-        $iron_age = \App\Age::where('slug', 'iron-age')->first();
+            foreach ($types as $type) {
+                factory(\App\BuildingRequirement::class)->create(['building_id' => $building->id, 'supply_id' => $type->id]);
+            }
 
-        \App\Building::create([
-
-            'name' => 'Stone Mine',
-            'slug' => 'stone-mine',
-            'type' => 'mine',
-            'age_id' => $iron_age->id
-
-        ]);
+        });
 
 
     }

@@ -15,19 +15,53 @@
                     @endif
 
                     <div class="row">
-                        <buildings-component></buildings-component>
+
+                        <h2>Buildings</h2>
+
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Building</th>
+                                <th>Level</th>
+                                <th>Next Work</th>
+                                <th>Supply</th>
+                                <th>Upgrade</th>
+                            </tr>
+
+                            @foreach ($buildings as $userBuilding)
+                            <tr>
+                                <td>
+                                    {{ $userBuilding->building->name }}
+                                </td>
+                                <td>
+                                    {{ $userBuilding->level }}
+                                </td>
+                                <td>
+                                    {{ $userBuilding->next_work_time }}
+                                </td>
+                                <td>
+                                    {{ $userBuilding->next_work_supply }} {{ $userBuilding->building_type }}
+                                </td>
+                                <td>
+                                    @if ($userBuilding->can_be_upgraded === true)
+                                        <a href="{{ route('user.building.upgrade', $userBuilding) }}"><button class="btn btn-success">Upgrade</button></a>
+                                    @else
+                                        Requirements not met - {{ $userBuilding->can_be_upgraded  }}
+                                    @endif
+
+                                </td>
+                            </tr>
+                            @endforeach
+
+                        </table>
+
                     </div>
 
+                    <br/><hr/><br/>
 
                     <div class="row">
-
                         <stats-component></stats-component>
-
                         <supply-component></supply-component>
-
-
                     </div>
-
                 </div>
 
 
