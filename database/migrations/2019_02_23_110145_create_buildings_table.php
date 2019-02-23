@@ -18,7 +18,6 @@ class CreateBuildingsTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('type');
-
             $table->unsignedInteger('age_id');
             $table->timestamps();
 

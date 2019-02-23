@@ -26,6 +26,20 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="avatar_name" class="col-md-4 col-form-label text-md-right">{{ __('Avatar Name') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="avatar_name" type="text" class="form-control{{ $errors->has('avatar_name') ? ' is-invalid' : '' }}" name="avatar_name" value="{{ old('avatar_name') }}" required autofocus>
+
+                                @if ($errors->has('avatar_name'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('avatar_name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
@@ -60,6 +74,31 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
+
+
+                        <div class="form-group row">
+                            <label for="starting-location" class="col-md-4 col-form-label text-md-right">{{ __('Starting Location') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="starting-location" name="starting_location" class="form-control" required>
+                                    <option value="">--SELECT A STARTING LOCATION--</option>
+                                    @foreach($locations as $location)
+                                        <option value="{{$location->id}}">{{ $location->name }} - {{ $location->users_count }} Users</option>
+                                    @endforeach
+                                </select>
+
+                                @if ($errors->has('starting_location'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('starting_location') }}</strong>
+                                    </span>
+                                @endif
+
+                            </div>
+
+
+
+                        </div>
+
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

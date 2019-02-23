@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'avatar_name', 'location_id', 'age_id'
     ];
 
     /**
@@ -46,4 +46,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function age() {
+        return $this->belongsTo(Age::class);
+    }
+
+    public function buildings() {
+        return $this->belongsToMany(Building::class,'user_buildings');
+    }
+
+    public function clan() {
+        return $this->belongsTo(Clan::class);
+    }
+
 }

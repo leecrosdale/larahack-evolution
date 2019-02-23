@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Age;
+use App\Location;
 use App\User;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -51,8 +53,10 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'avatar_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'starting_location' => ['required']
         ]);
     }
 
@@ -64,11 +68,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
         return User::create([
             'name' => $data['name'],
+            'avatar_name' => $data['avatar_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'last_login' => Carbon::now()->toDateTimeString()
+            'last_login' => Carbon::now()->toDateTimeString(),
+            'location_id' => $data['starting_location'],
+            'age_id' => Age::where('is_starting_age',true)->first()->id
         ]);
+    }
+
+    public function showRegistrationForm()
+    {
+        $locations = Location::withCount('users')->get();
+        return view('auth.register', compact('locations'));
     }
 }

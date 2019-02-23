@@ -17,7 +17,9 @@ class CreateAgesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('slug');
-            $table->integer('level');
+            $table->unsignedInteger('order');
+            $table->unsignedInteger('required_level');
+            $table->tinyInteger('is_starting_age')->default(0);
             $table->timestamps();
         });
     }

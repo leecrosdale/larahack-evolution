@@ -23,6 +23,19 @@ class UsersTableSeeder extends Seeder
                 $user->save();
             }
 
+            $ages = \App\Age::where('order', '<=', $user->age->order)->get();
+
+            $buildings = \App\Building::whereIn('id', $ages->pluck('id'))->get();
+            foreach ($buildings as $building) {
+                $amount = random_int(0,5);
+                if ($amount) {
+                    factory(\App\UserBuilding::class, $amount)->create(['building_id' => $building->id, 'user_id' => $user->id ]);
+                }
+            }
+
+
+
+
 
         });
 

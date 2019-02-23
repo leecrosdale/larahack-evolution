@@ -15,7 +15,17 @@ class CreateUserBuildingsTable extends Migration
     {
         Schema::create('user_buildings', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('building_id');
+            $table->unsignedInteger('level');
+            $table->unsignedInteger('health');
+            $table->unsignedInteger('max_health');
+
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('building_id')->references('id')->on('buildings');
+
         });
     }
 

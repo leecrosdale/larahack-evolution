@@ -23,5 +23,17 @@ class BuildingsTableSeeder extends Seeder
 
         ]);
 
+        $iron_age = \App\Age::where('slug', 'iron-age')->first();
+
+        \App\Building::create([
+
+            'name' => 'Stone Mine',
+            'slug' => 'stone-mine',
+            'type' => 'mine',
+            'age_id' => $iron_age->id
+
+        ]);
+
+
     }
 }

@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
 
             $table->unsignedInteger('location_id');
             $table->unsignedInteger('clan_id')->nullable();
+            $table->unsignedInteger('age_id');
 
             $table->tinyInteger('active')->default(true);
             $table->dateTime('last_login')->nullable();
@@ -39,6 +40,8 @@ class CreateUsersTable extends Migration
 
             $table->foreign('location_id')->references('id')->on('locations');
             $table->foreign('clan_id')->references('id')->on('clans');
+            $table->foreign('age_id')->references('id')->on('ages');
+
         });
     }
 

@@ -15,13 +15,16 @@ class AgesTableSeeder extends Seeder
         \App\Age::create([
             'name' => 'Stone Age',
             'slug' => 'stone-age',
-            'level'  => 0
+            'required_level'  => 0,
+            'order' => 0,
+            'is_starting_age' => true,
         ]);
 
         \App\Age::create([
             'name' => 'Iron Age',
             'slug' => 'iron-age',
-            'level' => 5
+            'required_level' => 5,
+            'order' => 1
         ]);
 
 
