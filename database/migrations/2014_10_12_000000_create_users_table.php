@@ -16,11 +16,29 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('avatar_name')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            // Stats
+            $table->unsignedInteger('level')->default(0);
+            $table->unsignedInteger('experience')->default(0);
+            $table->unsignedInteger('health')->default(100);
+            $table->unsignedInteger('max_health')->default(100);
+            $table->unsignedInteger('strength')->default(1);
+            $table->unsignedInteger('stamina')->default(1);
+
+            $table->unsignedInteger('location_id');
+            $table->unsignedInteger('clan_id')->nullable();
+
+            $table->tinyInteger('active')->default(true);
+            $table->dateTime('last_login')->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('location_id')->references('id')->on('locations');
+            $table->foreign('clan_id')->references('id')->on('clans');
         });
     }
 
