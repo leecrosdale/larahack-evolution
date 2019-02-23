@@ -20,6 +20,9 @@ class UserBuilding extends Model
         return $this->belongsTo(Building::class);
     }
 
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 
     public function getNextWorkTimeAttribute() {
             $difference = Carbon::now()->diffInSeconds($this->next_work, false);
@@ -27,7 +30,7 @@ class UserBuilding extends Model
     }
 
     public function getNextWorkSupplyAttribute() {
-        return $this->level * 5;
+        return $this->level * 2;
     }
 
     public function getBuildingTypeAttribute() {

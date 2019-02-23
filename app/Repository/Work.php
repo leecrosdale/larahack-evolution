@@ -26,12 +26,13 @@ class Work
         $type = $this->getType($userBuilding->building);
 
         $supply = $user->supplies()->where('slug',$type)->first();
-
         $user_supply = UserSupply::where('user_id', $user->id)->where('supply_id', $supply->id)->first();
 
-        $user_supply->amount = $user_supply->amount + $user_supply->next_work_supply;
-        $user_supply->next_work = Carbon::now()->addMinutes(5);
+        $user_supply->amount = $user_supply->amount + $userBuilding->next_work_supply;
         $user_supply->save();
+
+        $userBuilding->next_work = Carbon::now()->addMinutes(5);
+        $userBuilding->save();
 
     }
 

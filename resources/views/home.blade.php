@@ -45,7 +45,10 @@
                                     @if ($userBuilding->can_be_upgraded === true)
                                         <a href="{{ route('user.building.upgrade', $userBuilding) }}"><button class="btn btn-success">Upgrade</button></a>
                                     @else
-                                        Requirements not met - {{ $userBuilding->can_be_upgraded  }}
+                                        Supply Needed:
+                                        @foreach ($userBuilding->can_be_upgraded as $key => $requirement)
+                                            {{ $requirement }} {{ $key }},
+                                        @endforeach
                                     @endif
 
                                 </td>

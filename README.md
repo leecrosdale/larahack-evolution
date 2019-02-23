@@ -40,5 +40,5 @@
 
 - [ ] Clan Buildings
 - [ ] Chat / Inbox System
-
+- [ ] Move game ticker to queue
 
