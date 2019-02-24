@@ -106,7 +106,7 @@
                                         <th>Level</th>
                                         <th>Experience</th>
                                     </tr>
-                                    @foreach (\App\User::orderBy('level','DESC')->limit(10)->get() as $user)
+                                    @foreach (\App\User::orderBy('level','DESC')->orderBy('experience', 'DESC')->limit(10)->get() as $user)
                                             <tr>
                                                 <td>{{ $user->avatar_name }}</td>
                                                 <td>{{ $user->level }}</td>
