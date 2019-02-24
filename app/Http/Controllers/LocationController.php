@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Location;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LocationController extends Controller
 {
@@ -18,6 +19,23 @@ class LocationController extends Controller
         return view('locations.index')->withLocations($locations);
     }
 
+    public function travel(Location $location) {
+
+        $distance = $location->id  - Auth::user()->location_id;
+        $travel_cost = $distance < 0 ? $distance * -1 : $distance;
+
+        $user = Auth::user();
+        if ($user->energy >= $travel_cost) {
+            $user->location_id = $location->id;
+            $user->energy -= $travel_cost;
+            $user->save();
+            return redirect(url('home'));
+        }
+
+        return back()->with(['errors' => ['You don\'t have enough energy']]);
+
+
+    }
     /**
      * Show the form for creating a new resource.
      *

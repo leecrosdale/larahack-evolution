@@ -46,6 +46,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('training.index') }}">{{ __('Training') }}</a>
                             </li>
+
                         @endauth
                     </ul>
 
@@ -63,7 +64,23 @@
                             @endif
                         @else
 
+                            <li class="nav-item">
+                                <span class="nav-link">{{ __('Health:') }}</span>
+                            </li>
+                            <li class="nav-item">
+                                <progress class="nav-link" id="health" value="{{ \Illuminate\Support\Facades\Auth::user()->health }}" max="{{ \Illuminate\Support\Facades\Auth::user()->max_health }}"></progress>
+                            </li>
+
+                            <li class="nav-item">
+                                <span class="nav-link">{{ __('Energy:') }}</span>
+                            </li>
+                            <li class="nav-item">
+                                <progress class="nav-link" id="energy" value="{{ \Illuminate\Support\Facades\Auth::user()->energy }}" max="{{ \Illuminate\Support\Facades\Auth::user()->max_energy }}"></progress>
+                            </li>
+
                             <li class="nav-item dropdown">
+
+
 
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->avatar_name }} <span class="caret"></span>
@@ -88,6 +105,27 @@
         </nav>
 
         <main class="py-4">
+
+            @if (isset($errors))
+
+                <div class="col-md-6 offset-3">
+                @foreach ($errors as $error)
+                    <div class="alert alert-danger">{{ $error }}</div>
+                @endforeach
+                </div>
+
+            @endif
+
+
+                @if(session()->has('success'))
+                    <div class="col-md-6 offset-3">
+                        @foreach (session()->get('success') as $message)
+                            <div class="alert alert-success">{{ $message }}</div>
+                        @endforeach
+                    </div>
+                @endif
+
+
             @yield('content')
         </main>
     </div>

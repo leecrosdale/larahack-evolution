@@ -20,8 +20,22 @@
             </tr>
 
             <tr>
-                <td>Health</td>
-                <td>{{ user.health }} / {{ user.max_health }}</td>
+                <td>Health
+
+                    <a v-if="energy(2)" href="/user/heal"><button class="btn btn-dark">Heal</button></a>
+
+                </td>
+                <td>
+                    {{ user.health }} / {{ user.max_health }}
+                    <progress class="nav-link" id="health" :value="user.health" :max="user.max_health"></progress>
+                </td>
+            </tr>
+            <tr>
+                <td>Energy  <a v-if="!energy(2)" href="/user/sleep"><button class="btn btn-dark">Sleep</button></a></td>
+                <td>
+                    {{ user.energy }} / {{ user.max_energy }}
+                    <progress class="nav-link" id="energy" :value="user.energy" :max="user.max_energy"></progress>
+                </td>
             </tr>
             <tr>
                 <td>Level</td>
@@ -51,6 +65,11 @@
         },
         data(){
             return {};
+        },
+        methods: {
+            energy (value) {
+                return this.user.energy > value;
+            }
         },
         computed: {
             user() {

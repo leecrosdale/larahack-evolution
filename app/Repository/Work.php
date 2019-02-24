@@ -23,6 +23,11 @@ class Work
 
     public function doWork(UserBuilding $userBuilding, $user) {
 
+        if ($user->energy < 2) return;
+
+        $user->energy -= 2;
+        $user->save();
+
         $type = $this->getType($userBuilding->building);
 
         $supply = $user->supplies()->where('slug',$type)->first();

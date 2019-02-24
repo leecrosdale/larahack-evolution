@@ -37,4 +37,8 @@ Route::group(['middleware' => ['web','auth']], function () {
 
     Route::resource('clans', 'ClanController');
 
+    Route::get('user/sleep', 'UserController@sleep');
+    Route::get('user/heal', 'UserController@heal');
+
+
 });

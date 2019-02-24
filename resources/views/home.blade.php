@@ -40,12 +40,15 @@
                                 </td>
                                 <td>
                                     {{ $userBuilding->health }} / {{ $userBuilding->max_health }}
+                                    <progress class="nav-link" id="health" value="{{ $userBuilding->health }} " max="{{$userBuilding->max_health}}"></progress>
                                 </td>
                                 <td>
-                                    @if (\Carbon\Carbon::now()->diffInSeconds($userBuilding->next_work, false) <= 0)
-                                        <a href="{{ route('user.building.work', $userBuilding) }}"><button class="btn btn-success">Work</button></a>
-                                    @else
+                                    @if (\Carbon\Carbon::now()->diffInSeconds($userBuilding->next_work, false) <= 0 && \Illuminate\Support\Facades\Auth::user()->energy >= 2)
+                                        <a href="{{ route('user.building.work', $userBuilding) }}"><button class="btn btn-success">Work (2 Energy)</button></a>
+                                    @elseif (\Carbon\Carbon::now()->diffInSeconds($userBuilding->next_work, false) >= 0)
                                         {{ $userBuilding->next_work_time }}
+                                    @else
+                                        Need at least 2 energy
                                     @endif
                                 </td>
                                 <td>

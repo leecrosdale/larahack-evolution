@@ -15,24 +15,18 @@
 ### Logic
 - [ ] Game Ticker - so game runs without user
 - [ ] Game Logic
-- [ ] Trading
-- [ ] Clans
-- [ ] Location
+- [x] Location
     - [ ] Movement
 - [x] Work
-    - [ ] Farms
-    - [ ] Fishing
+    - [ ] Farms    
     - [ ] Mining
-- [ ] Buildings
-    - [ ] Upgrades
+- [x] Buildings
+    - [x] Upgrades
     - [x] Upgrade Calculator
         
 ### Frontend
-- [ ] Trading
-    - [ ] Direct Trading
-    - [ ] Marketplaces
 - [ ] Clans
-- [ ] Location
+- [x] Location
     - [ ] Movement
 - [x] Work
     - [ ] Farms
@@ -44,4 +38,8 @@
 - [ ] Clan Buildings
 - [ ] Chat / Inbox System
 - [ ] Move game ticker to queue
-
+- [ ] Fishing
+- [ ] Clans
+- [ ] Trading
+    - [ ] Direct Trading
+    - [ ] Marketplaces

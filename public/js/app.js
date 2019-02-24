@@ -1885,10 +1885,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {},
   data: function data() {
     return {};
+  },
+  methods: {
+    energy: function energy(value) {
+      return this.user.energy > value;
+    }
   },
   computed: {
     user: function user() {
@@ -37078,10 +37097,54 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("tr", [
-        _c("td", [_vm._v("Health")]),
+        _c("td", [
+          _vm._v("Health\n\n                "),
+          _vm.energy(2)
+            ? _c("a", { attrs: { href: "/user/heal" } }, [
+                _c("button", { staticClass: "btn btn-dark" }, [_vm._v("Heal")])
+              ])
+            : _vm._e()
+        ]),
         _vm._v(" "),
         _c("td", [
-          _vm._v(_vm._s(_vm.user.health) + " / " + _vm._s(_vm.user.max_health))
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.user.health) +
+              " / " +
+              _vm._s(_vm.user.max_health) +
+              "\n                "
+          ),
+          _c("progress", {
+            staticClass: "nav-link",
+            attrs: { id: "health", max: _vm.user.max_health },
+            domProps: { value: _vm.user.health }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("td", [
+          _vm._v("Energy  "),
+          !_vm.energy(2)
+            ? _c("a", { attrs: { href: "/user/sleep" } }, [
+                _c("button", { staticClass: "btn btn-dark" }, [_vm._v("Sleep")])
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("td", [
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.user.energy) +
+              " / " +
+              _vm._s(_vm.user.max_energy) +
+              "\n                "
+          ),
+          _c("progress", {
+            staticClass: "nav-link",
+            attrs: { id: "energy", max: _vm.user.max_energy },
+            domProps: { value: _vm.user.energy }
+          })
         ])
       ]),
       _vm._v(" "),
