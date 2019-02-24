@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Age;
+use App\Enums\SupplyType;
 use App\Location;
+use App\Supply;
 use App\User;
 use App\Http\Controllers\Controller;
+use App\UserSupply;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -77,7 +81,8 @@ class RegisterController extends Controller
             'last_login' => Carbon::now()->toDateTimeString(),
             'location_id' => $data['starting_location'],
             'age_id' => Age::where('is_starting_age',true)->first()->id,
-            'api_token' => str_random(100)
+            'api_token' => str_random(100),
+            'level' => 1
         ]);
     }
 
@@ -85,5 +90,37 @@ class RegisterController extends Controller
     {
         $locations = Location::withCount('users')->get();
         return view('auth.register', compact('locations'));
+    }
+
+    protected function registered(Request $request, $user)
+    {
+
+        UserSupply::create([
+            'user_id' => $user->id,
+            'supply_id' => Supply::where('slug', SupplyType::WOOD)->first()->id,
+            'amount' => 100
+        ]);
+
+        UserSupply::create([
+            'user_id' => $user->id,
+            'supply_id' => Supply::where('slug', SupplyType::FOOD)->first()->id,
+            'amount' => 100
+        ]);
+
+        UserSupply::create([
+            'user_id' => $user->id,
+            'supply_id' => Supply::where('slug', SupplyType::STONE)->first()->id,
+            'amount' => 100
+        ]);
+
+        UserSupply::create([
+            'user_id' => $user->id,
+            'supply_id' => Supply::where('slug', SupplyType::GOLD)->first()->id,
+            'amount' => 0
+        ]);
+
+
+
+
     }
 }

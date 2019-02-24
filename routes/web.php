@@ -23,11 +23,14 @@ Route::group(['middleware' => ['web','auth']], function () {
     Route::get('home', 'HomeController@index')->name('home');
 
     Route::resource('locations', 'LocationController');
+    Route::get('locations/{location}/travel', 'LocationController@travel')->name('location.travel');
+
+    Route::resource('training', 'TrainingController');
 
     Route::get('buildings/buy', 'UserBuildingController@buy')->name('user.building.buy');
     Route::get('buildings/{building}/buy', 'BuildingController@buy')->name('building.buy');
 
-    Route::resource('buildings', 'BuildingController');
+    Route::resource('buildings', 'UserBuildingController');
 
     Route::get('buildings/{building}/work', 'UserBuildingController@work')->name('user.building.work');
     Route::get('buildings/{building}/upgrade', 'UserBuildingController@upgrade')->name('user.building.upgrade');

@@ -26,6 +26,10 @@ class UserBuilding extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function location() {
+        return $this->belongsTo(Location::class);
+    }
+
     public function getNextWorkTimeAttribute()
     {
         $difference = Carbon::now()->diffInSeconds($this->next_work, false);
@@ -46,13 +50,9 @@ class UserBuilding extends Model
     public function getCanBeUpgradedAttribute()
     {
 
-//        $supplies = Auth::user()->supplies_total;
-
+        //($requirement->amount * $requirement->multiplier) * $building->level
         $requirements = $this->building->requirements;
-
-
         $errors = Auth::user()->afford_upgrade($requirements,$this);
-
 
         if (!empty($errors) && is_array($errors)) {
             return collect($errors);

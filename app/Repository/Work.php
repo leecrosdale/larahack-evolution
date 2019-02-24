@@ -31,7 +31,7 @@ class Work
         $user_supply->amount = $user_supply->amount + $userBuilding->next_work_supply;
         $user_supply->save();
 
-        $userBuilding->next_work = Carbon::now()->addMinutes(5);
+        $userBuilding->next_work = Carbon::now()->addMinutes($userBuilding->level + 1);
         $userBuilding->save();
 
     }

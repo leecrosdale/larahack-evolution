@@ -44,7 +44,7 @@
                                 <a class="nav-link" href="{{ route('buildings.index') }}">{{ __('Buildings') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('clans.index') }}">{{ __('Clans') }}</a>
+                                <a class="nav-link" href="{{ route('training.index') }}">{{ __('Training') }}</a>
                             </li>
                         @endauth
                     </ul>

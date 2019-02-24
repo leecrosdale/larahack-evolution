@@ -42,7 +42,7 @@
                                     {{ $userBuilding->health }} / {{ $userBuilding->max_health }}
                                 </td>
                                 <td>
-                                    @if (\Carbon\Carbon::now()->diffInSeconds($userBuilding->next_work, false) < 0)
+                                    @if (\Carbon\Carbon::now()->diffInSeconds($userBuilding->next_work, false) <= 0)
                                         <a href="{{ route('user.building.work', $userBuilding) }}"><button class="btn btn-success">Work</button></a>
                                     @else
                                         {{ $userBuilding->next_work_time }}

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Location;
+use App\Training;
 use Illuminate\Http\Request;
 
-class LocationController extends Controller
+class TrainingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class LocationController extends Controller
      */
     public function index()
     {
-        $locations = Location::with('users')->get();
-        return view('locations.index')->withLocations($locations);
+        //
     }
 
     /**
@@ -42,10 +41,10 @@ class LocationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Location  $location
+     * @param  \App\Training  $training
      * @return \Illuminate\Http\Response
      */
-    public function show(Location $location)
+    public function show(Training $training)
     {
         //
     }
@@ -53,10 +52,10 @@ class LocationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Location  $location
+     * @param  \App\Training  $training
      * @return \Illuminate\Http\Response
      */
-    public function edit(Location $location)
+    public function edit(Training $training)
     {
         //
     }
@@ -65,10 +64,10 @@ class LocationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Location  $location
+     * @param  \App\Training  $training
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Location $location)
+    public function update(Request $request, Training $training)
     {
         //
     }
@@ -76,10 +75,10 @@ class LocationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Location  $location
+     * @param  \App\Training  $training
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Location $location)
+    public function destroy(Training $training)
     {
         //
     }

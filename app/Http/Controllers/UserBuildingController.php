@@ -16,7 +16,10 @@ class UserBuildingController extends Controller
      */
     public function index()
     {
-        //
+        $buildings = Auth::user()->user_buildings()->with(['building','location'])->get();
+
+        return view('buildings.index')->withBuildings($buildings);
+
     }
 
     public function work(UserBuilding $building) {
@@ -30,12 +33,14 @@ class UserBuildingController extends Controller
     public function upgrade(UserBuilding $building) {
 
         if ($building->can_be_upgraded) {
-            ++$building->level;
-            $building->save();
 
             // Remove Supply
             $requirements = $building->requirements();
+
             Auth::user()->remove_supplies($requirements);
+
+            ++$building->level;
+            $building->save();
 
         }
 
