@@ -27,20 +27,44 @@
 
                                                 ({{ $travel_cost }} Energy)
                                         </div>
-                                        <div class="card-body">
+                                        <div class="card-body table-responsive">
 
-                                            <ul>
+                                                <table class="table table-striped table-responsive">
+
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Level</th>
+                                                        <th>-</th>
+                                                        <th>-</th>
+                                                        <th>-</th>
+                                                    </tr>
                                             @foreach($location->users as $user)
                                                     @if ($user->id != \Illuminate\Support\Facades\Auth::user()->id)
-                                                        <li>
-                                                            {{ $user->avatar_name }} - Level {{ $user->level }}
-                                                            <button class="btn btn-success">Message</button>
-                                                            <button class="btn btn-secondary">Trade</button>
-                                                            <button class="btn btn-danger">Attack</button>
-                                                        </li>
+
+                                                            <tr>
+                                                                <td>
+                                                                    {{ $user->avatar_name }}
+                                                                </td>
+                                                                <td>
+                                                                    {{ $user->level }}
+                                                                </td>
+                                                                <td>
+                                                                    <button class="btn btn-success" disabled="disabled">Message</button>
+                                                                </td>
+                                                                <td>
+                                                                    <button class="btn btn-secondary" disabled="disabled">Trade</button>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="{{ route('user.attack', $user) }}">
+                                                                        <button class="btn btn-danger">Attack</button>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+
+
                                                     @endif
                                             @endforeach
-                                            </ul>
+                                                </table>
 
                                         </div>
 

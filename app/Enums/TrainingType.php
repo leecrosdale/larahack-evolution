@@ -17,4 +17,9 @@ class TrainingType
     public const ENERGY = 'energy';
     public const HEALTH = 'health';
 
+
+    public const ALL = 'all';
+    public const HALF = 'half';
+    public const QTR = 'qtr';
+
 }

@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 
-Route::group(['middleware' => ['web','auth', 'check.level']], function () {
+Route::group(['middleware' => ['web','auth', 'check.level', 'check.alive']], function () {
 
     Route::get('home', 'HomeController@index')->name('home');
 
@@ -26,6 +26,7 @@ Route::group(['middleware' => ['web','auth', 'check.level']], function () {
     Route::get('locations/{location}/travel', 'LocationController@travel')->name('location.travel');
 
     Route::resource('training', 'TrainingController');
+
 
     Route::get('buildings/buy', 'UserBuildingController@buy')->name('user.building.buy');
     Route::get('buildings/{building}/buy', 'BuildingController@buy')->name('building.buy');
@@ -37,8 +38,13 @@ Route::group(['middleware' => ['web','auth', 'check.level']], function () {
 
     Route::resource('clans', 'ClanController');
 
-    Route::get('user/sleep', 'UserController@sleep');
-    Route::get('user/heal', 'UserController@heal');
+    Route::get('user/sleep', 'UserController@sleep')->name('user.sleep');
+    Route::get('user/heal', 'UserController@heal')->name('user.heal');
+    Route::get('user/attack/{user}', 'UserController@attack')->name('user.attack');
+    Route::get('train/{type}/{amount}', 'UserController@train')->name('user.train');
 
+});
 
+Route::group(['middleware' => ['web','auth']], function () {
+    Route::get('user/dead', 'UserController@dead')->name('user.dead');
 });

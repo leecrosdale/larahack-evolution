@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckUserAlive;
 use App\Http\Middleware\CheckUserLevel;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -61,7 +62,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'check.level' => CheckUserLevel::class
+        'check.level' => CheckUserLevel::class,
+        'check.alive' => CheckUserAlive::class,
     ];
 
     /**

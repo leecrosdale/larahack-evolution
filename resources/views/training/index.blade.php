@@ -7,59 +7,58 @@
                 <div class="card">
                     <div class="card-header">Training</div>
 
-                    <div class="row">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-header">Strength</div>
-                                    <div class="card-body">
-                                        @if (\Illuminate\Support\Facades\Auth::user()->can_train())
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="card-body">
+                    @if (!\Illuminate\Support\Facades\Auth::user()->can_train)
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card">
-                                    <div class="card-header">Stamina</div>
                                     <div class="card-body">
+                                        You can retrain in {{ Auth::user()->last_train->addMinutes(15)->diffForHumans() }}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    </div>
-                    <div class="row">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-header">Energy</div>
-                                    <div class="card-body">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @else
 
-                    <div class="card-body">
+                    @php
+
+                    $elements = ['strength','stamina','energy','health']
+
+                    @endphp
+
+
+
+                        @foreach ($elements as $element)
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card">
-                                    <div class="card-header">Health</div>
+                                    <div class="card-header">{{ ucfirst($element) }}</div>
                                     <div class="card-body">
+                                            <a href="{{ url('/train/' . $element . '/all')}}">
+                                                <button class="btn btn-primary">
+                                                    Train using all energy
+                                                </button>
+                                            </a>
+                                            <a href="{{ url('/train/' . $element . '/half')}}">
+                                                <button class="btn btn-secondary">
+                                                    Train using half energy
+                                                </button>
+                                            </a>
+                                            <a href="{{ url('/train/' . $element . '/qtr')}}">
+                                                <button class="btn btn-warning">
+                                                    Train using quarter energy
+                                                </button>
+                                            </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    </div>
+                        @endforeach
+
+                        @endif
+
+
                 </div>
-            </div>
         </div>
     </div>
     </div>

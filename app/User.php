@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,7 +14,9 @@ class User extends Authenticatable
 
     protected $dates = [
         'last_login',
-        'last_sleep'
+        'last_sleep',
+        'last_train',
+        'last_heal'
     ];
 
     /**
@@ -43,7 +46,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $appends = ['supplies_total'];
+    protected $appends = ['supplies_total','can_train', 'can_heal'];
 
     public function getSuppliesTotalAttribute() {
         $supplies = [];
@@ -119,6 +122,30 @@ class User extends Authenticatable
 
             $this->save();
         }
+
+    }
+
+    public function getCanTrainAttribute() {
+
+        if ($this->last_train) {
+            if (Carbon::now()->diffInMinutes($this->last_train) <= 15) {
+               return false;
+            }
+        }
+
+        return true;
+
+    }
+
+    public function getCanHealAttribute() {
+
+        if ($this->last_heal) {
+            if (Carbon::now()->diffInDays($this->last_heal) === 0) {
+                return false;
+            }
+        }
+
+        return true;
 
     }
 
