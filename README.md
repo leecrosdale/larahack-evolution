@@ -19,10 +19,13 @@
 - [ ] Clans
 - [ ] Location
     - [ ] Movement
-- [ ] Work
+- [x] Work
     - [ ] Farms
     - [ ] Fishing
     - [ ] Mining
+- [ ] Buildings
+    - [ ] Upgrades
+    - [x] Upgrade Calculator
         
 ### Frontend
 - [ ] Trading
@@ -31,7 +34,7 @@
 - [ ] Clans
 - [ ] Location
     - [ ] Movement
-- [ ] Work
+- [x] Work
     - [ ] Farms
     - [ ] Fishing
     - [ ] Mining

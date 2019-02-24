@@ -19,7 +19,7 @@ class HomeController extends Controller
 
         $user = Auth::user();
 
-        $buildings = $user->user_buildings()->with('building')->get();
+        $buildings = $user->user_buildings()->where('location_id',Auth::user()->location_id)->with('building')->get();
 
         return view('home', compact(['user','buildings']));
     }

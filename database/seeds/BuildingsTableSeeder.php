@@ -12,17 +12,55 @@ class BuildingsTableSeeder extends Seeder
     public function run()
     {
 
+        $building = new \App\Building();
+        $building->name = 'Farm';
+        $building->slug = 'farm';
+        $building->type = \App\Enums\BuildingType::FARM;
+        $building->age_id = 1;
+        $building->save();
 
 
-        factory(\App\Building::class, 15)->create()->each(function ($building) {
+        $type = \App\Supply::where('slug', \App\Enums\SupplyType::WOOD)->first();
+        factory(\App\BuildingRequirement::class)->create(['building_id' => $building->id, 'supply_id' => $type->id]);
 
-            $types = \App\Supply::inRandomOrder()->limit(rand(1,4))->get();
+        $type = \App\Supply::where('slug', \App\Enums\SupplyType::FOOD)->first();
+        factory(\App\BuildingRequirement::class)->create(['building_id' => $building->id, 'supply_id' => $type->id]);
 
-            foreach ($types as $type) {
-                factory(\App\BuildingRequirement::class)->create(['building_id' => $building->id, 'supply_id' => $type->id]);
-            }
 
-        });
+        $building = new \App\Building();
+        $building->name = 'Mine';
+        $building->slug = 'mine';
+        $building->age_id = 1;
+        $building->type = \App\Enums\BuildingType::MINE;
+        $building->save();
+
+        $type = \App\Supply::where('slug', \App\Enums\SupplyType::STONE)->first();
+        factory(\App\BuildingRequirement::class)->create(['building_id' => $building->id, 'supply_id' => $type->id]);
+
+        $type = \App\Supply::where('slug', \App\Enums\SupplyType::WOOD)->first();
+        factory(\App\BuildingRequirement::class)->create(['building_id' => $building->id, 'supply_id' => $type->id]);
+
+
+        $building = new \App\Building();
+        $building->name = 'Forest';
+        $building->slug = 'forest';
+        $building->age_id = 1;
+        $building->type = \App\Enums\BuildingType::WOOD;
+        $building->save();
+
+        $type = \App\Supply::where('slug', \App\Enums\SupplyType::FOOD)->first();
+        factory(\App\BuildingRequirement::class)->create(['building_id' => $building->id, 'supply_id' => $type->id]);
+
+
+//        factory(\App\Building::class, 15)->create()->each(function ($building) {
+//
+//            $types = \App\Supply::inRandomOrder()->limit(rand(1,4))->get();
+//
+//            foreach ($types as $type) {
+//                factory(\App\BuildingRequirement::class)->create(['building_id' => $building->id, 'supply_id' => $type->id]);
+//            }
+//
+//        });
 
 
     }

@@ -24,17 +24,12 @@ class UsersTableSeeder extends Seeder
             }
 
             $ages = \App\Age::where('order', '<=', $user->age->order)->get();
-
             $buildings = \App\Building::whereIn('age_id', $ages->pluck('id'))->get();
             foreach ($buildings as $building) {
-                $amount = random_int(0,5);
-                if ($amount) {
-                    factory(\App\UserBuilding::class, $amount)->create(['building_id' => $building->id, 'user_id' => $user->id ]);
+                if (random_int(0,1) === 1) {
+                    factory(\App\UserBuilding::class)->create(['building_id' => $building->id, 'user_id' => $user->id]);
                 }
             }
-
-
-
 
 
         });

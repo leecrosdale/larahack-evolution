@@ -43,8 +43,5 @@ class LoginController extends Controller
     {
         $user->last_login = Carbon::now()->toDateTimeString();
         $user->save();
-
-        return $user;
-
     }
 }

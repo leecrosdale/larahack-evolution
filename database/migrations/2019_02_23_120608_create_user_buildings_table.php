@@ -17,6 +17,7 @@ class CreateUserBuildingsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('building_id');
+            $table->unsignedInteger('location_id');
             $table->unsignedInteger('level');
             $table->unsignedInteger('health');
             $table->unsignedInteger('max_health');
@@ -26,6 +27,7 @@ class CreateUserBuildingsTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('building_id')->references('id')->on('buildings');
+            $table->foreign('location_id')->references('id')->on('locations');
 
         });
     }

@@ -13,7 +13,7 @@ class BuildingType
 {
 
     public const FARM = 'farm';
-    public const MINE = 'stone-mine';
+    public const MINE = 'mine';
     public const HOUSE = 'house';
     public const WOOD = 'wood';
 

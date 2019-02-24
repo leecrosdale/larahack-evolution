@@ -47,6 +47,63 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = ['supplies_total'];
+
+    public function getSuppliesTotalAttribute() {
+        $supplies = [];
+
+        foreach ($this->user_supplies as $supply) {
+            $supplies[$supply->supply->slug] = $supply->amount;
+        }
+        return $supplies;
+    }
+
+    public function afford_upgrade($requirements, $building) {
+
+        $supplies = $this->supplies_total;
+
+        $errors = [];
+
+        foreach ($requirements as $requirement) {
+
+            $required_amount = ($requirement->amount * $requirement->multiplier) * $building->level;
+
+            if ($required_amount > $supplies[$requirement->supply->slug]) {
+                $errors[$requirement->supply->slug] = $required_amount - $supplies[$requirement->supply->slug];
+            }
+
+        }
+
+        return !empty($errors) ? $errors : true;
+    }
+
+    public function afford_purchase($requirements) {
+
+        $supplies = $this->supplies_total;
+
+        $errors = [];
+
+        foreach ($requirements as $type => $amount) {
+
+            if ($amount > $supplies[$type]) {
+                $errors[$type] = $amount - $supplies[$type];
+            }
+
+        }
+
+        return !empty($errors) ? $errors : true;
+    }
+
+    public function remove_supplies($amounts) {
+
+        foreach ($this->user_supplies as $supplies) {
+            if (isset($amounts[$supplies->supply->slug])) {
+                $supplies->amount = $supplies->amount - $amounts[$supplies->supply->slug];
+                $supplies->save();
+            }
+        }
+
+    }
 
     public function age() {
         return $this->belongsTo(Age::class);

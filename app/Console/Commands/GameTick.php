@@ -45,9 +45,7 @@ class GameTick extends Command
         $work = new Work();
 
         foreach ($buildings as $building) {
-
             $work->doWork($building, $building->user);
-
         }
 
     }

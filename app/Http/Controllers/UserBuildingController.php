@@ -27,6 +27,31 @@ class UserBuildingController extends Controller
         return back();
     }
 
+    public function upgrade(UserBuilding $building) {
+
+        if ($building->can_be_upgraded) {
+            ++$building->level;
+            $building->save();
+
+            // Remove Supply
+            $requirements = $building->requirements();
+            Auth::user()->remove_supplies($requirements);
+
+        }
+
+        return back();
+    }
+
+    public function buy() {
+
+        $ages = \App\Age::where('order', '<=', Auth::user()->age->order)->get();
+        $availableBuildings =  \App\Building::whereIn('age_id', $ages->pluck('id'))->whereNotIn('id', Auth::user()->user_buildings()->where('location_id',Auth::user()->location_id)->get()->pluck('building_id'))->get();
+
+        return view('buildings.buy')->withBuildings($availableBuildings);
+
+    }
+
+
 
     /**
      * Show the form for creating a new resource.

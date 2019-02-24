@@ -14,53 +14,47 @@ class UserBuilding extends Model
         'next_work'
     ];
 
-    protected $appends = ['next_work_time', 'next_work_supply', 'building_type','can_be_upgraded'];
+    protected $appends = ['next_work_time', 'next_work_supply', 'building_type', 'can_be_upgraded'];
 
-    public function building() {
+    public function building()
+    {
         return $this->belongsTo(Building::class);
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function getNextWorkTimeAttribute() {
-            $difference = Carbon::now()->diffInSeconds($this->next_work, false);
-            return Carbon::now()->addSeconds($difference)->diffForHumans();
+    public function getNextWorkTimeAttribute()
+    {
+        $difference = Carbon::now()->diffInSeconds($this->next_work, false);
+        return Carbon::now()->addSeconds($difference)->diffForHumans();
     }
 
-    public function getNextWorkSupplyAttribute() {
+    public function getNextWorkSupplyAttribute()
+    {
         return $this->level * 2;
     }
 
-    public function getBuildingTypeAttribute() {
+    public function getBuildingTypeAttribute()
+    {
         $work = new Work();
         return $work->getType($this->building);
     }
 
-    public function getCanBeUpgradedAttribute() {
+    public function getCanBeUpgradedAttribute()
+    {
 
-        $supplies = [];
-
-        foreach (Auth::user()->user_supplies as $supply) {
-            $supplies[$supply->supply->slug] = $supply->amount;
-        }
+//        $supplies = Auth::user()->supplies_total;
 
         $requirements = $this->building->requirements;
 
-        $errors = [];
 
-        foreach ($requirements as $requirement) {
+        $errors = Auth::user()->afford_upgrade($requirements,$this);
 
-            $required_amount = ($requirement->amount * $requirement->multiplier) * $this->level;
 
-             if ($required_amount > $supplies[$requirement->supply->slug]) {
-                $errors[$requirement->supply->slug] = $required_amount - $supplies[$requirement->supply->slug];
-             }
-
-        }
-
-        if (!empty($errors)) {
+        if (!empty($errors) && is_array($errors)) {
             return collect($errors);
         }
 
@@ -69,9 +63,23 @@ class UserBuilding extends Model
 
     }
 
+    public function requirements() {
+        $building_requirements = $this->building->requirements;
 
+        $requirements = [];
 
+        foreach ($building_requirements as $requirement) {
+            $required_amount = ($requirement->amount * $requirement->multiplier) * $this->level;
+            $requirements[$requirement->supply->slug] = $required_amount;
+        }
 
+        return $requirements;
+    }
+
+    public function collectRequirements()
+    {
+        return collect($this->requirements());
+    }
 
 
 }
