@@ -116,7 +116,6 @@
 
             @endif
 
-
                 @if(session()->has('success'))
                     <div class="col-md-6 offset-3">
                         @foreach (session()->get('success') as $message)

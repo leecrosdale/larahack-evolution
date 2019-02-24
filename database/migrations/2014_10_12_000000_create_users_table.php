@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('energy')->default(10);
             $table->unsignedInteger('max_energy')->default(10);
             $table->dateTime('last_sleep')->nullable();
+            $table->dateTime('last_heal')->nullable();
 
             $table->unsignedInteger('location_id');
             $table->unsignedInteger('clan_id')->nullable();

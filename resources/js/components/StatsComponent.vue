@@ -22,7 +22,7 @@
             <tr>
                 <td>Health
 
-                    <a v-if="energy(2)" href="/user/heal"><button class="btn btn-dark">Heal</button></a>
+                    <a v-if="health()" href="/user/heal"><button class="btn btn-dark">Heal</button></a>
 
                 </td>
                 <td>
@@ -67,6 +67,9 @@
             return {};
         },
         methods: {
+            health() {
+              return this.user.health < this.user.max_health / 3;
+            },
             energy (value) {
                 return this.user.energy > value;
             }

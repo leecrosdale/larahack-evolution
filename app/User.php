@@ -101,6 +101,27 @@ class User extends Authenticatable
 
     }
 
+    public function give_exp($exp) {
+        $this->experience += $exp;
+        $this->save();
+
+        $this->check_should_level();
+
+        return $this;
+    }
+
+    public function check_should_level() {
+
+        if ($this->experience > ($this->level * 36)) {
+            ++$this->level;
+
+            session()->flash('success', ['You levelled up!']);
+
+            $this->save();
+        }
+
+    }
+
     public function age() {
         return $this->belongsTo(Age::class);
     }

@@ -32,4 +32,24 @@ class UserController extends Controller
 
         return back()->with(['errors' => ['You don\'t need to sleep right now']]);
     }
+
+    public function heal() {
+
+        $user = Auth::user();
+
+        if ($user->last_heal) {
+
+            if (Carbon::now()->diffInDays($user->last_heal) === 0) {
+                return back()->with(['errors' => ['You can only heal once every 24 hours - Last heal was ' . $user->last_heal->diffForHumans() ]]);
+            }
+
+        }
+
+        $user->health = $user->max_health;
+        $user->last_heal = Carbon::now()->toDateTimeString();
+        $user->save();
+        return back()->with(['success' => ['You feel more healthy']]);
+
+
+    }
 }

@@ -1905,6 +1905,9 @@ __webpack_require__.r(__webpack_exports__);
     return {};
   },
   methods: {
+    health: function health() {
+      return this.user.health < this.user.max_health / 3;
+    },
     energy: function energy(value) {
       return this.user.energy > value;
     }
@@ -37099,7 +37102,7 @@ var render = function() {
       _c("tr", [
         _c("td", [
           _vm._v("Health\n\n                "),
-          _vm.energy(2)
+          _vm.health()
             ? _c("a", { attrs: { href: "/user/heal" } }, [
                 _c("button", { staticClass: "btn btn-dark" }, [_vm._v("Heal")])
               ])

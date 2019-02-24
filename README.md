@@ -10,28 +10,31 @@
 - [x] Supply
 - [x] Ages
 - [ ] Items
-- [ ] Costs for buildings
+- [x] Costs for buildings
 
 ### Logic
-- [ ] Game Ticker - so game runs without user
-- [ ] Game Logic
+- [x] Game Ticker - Not Needed atm
 - [x] Location
-    - [ ] Movement
+    - [x] Movement
 - [x] Work
-    - [ ] Farms    
-    - [ ] Mining
+    - [x] Farms    
+    - [x] Mining
+    - [x] Trees
 - [x] Buildings
     - [x] Upgrades
     - [x] Upgrade Calculator
+- [x] User
+    - [x] Healing
+    - [x] Sleeping (Energy Recovery)
         
 ### Frontend
 - [ ] Clans
 - [x] Location
-    - [ ] Movement
+    - [x] Movement
 - [x] Work
-    - [ ] Farms
-    - [ ] Fishing
-    - [ ] Mining
+    - [x] Farms
+    - [x] Mining
+    - [x] Trees
 
 ### Out of scope
 
