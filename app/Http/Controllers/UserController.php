@@ -121,9 +121,8 @@ class UserController extends Controller
         $defendingUser->health -= $damage;
         $defendingUser->save();
 
-
-
         $attackingUser->energy -= 7;
+        $attackingUser->experience += $defendingUser->experience / 360;
         $attackingUser->save();
 
         return back()->with(['success' => [$message]]);
