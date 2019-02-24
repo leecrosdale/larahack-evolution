@@ -38,7 +38,7 @@
                                                         <th>-</th>
                                                         <th>-</th>
                                                     </tr>
-                                            @foreach($location->users as $user)
+                                            @foreach($location->alive_users as $user)
                                                     @if ($user->id != \Illuminate\Support\Facades\Auth::user()->id)
 
                                                             <tr>

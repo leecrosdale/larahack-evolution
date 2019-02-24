@@ -80,7 +80,9 @@ class UserController extends Controller
 
         if ($damage < 0) {
 
-            $damage_lost = $damage/2;
+            $damage_lost = ($damage/2) * -1;
+
+            if ($damage_lost > $attackingUser->health) { $damage_lost = $attackingUser->health; }
 
             $attackingUser->energy -= 7;
             $attackingUser->health -= $damage_lost;
@@ -101,15 +103,25 @@ class UserController extends Controller
                 $damage_returned = ($defendingUser->strength * $defendingUser->energy) - ($attackingUser->stamina * $attackingUser->energy) / 2;
                 $message .= 'but ' . $defendingUser->avatar_name . ' attacked back with ' . $damage_returned;
 
+
+                if ($damage_returned < 0) {
+                    $damage_returned = $attackingUser->health;
+                }
+
                 $attackingUser->health -= $damage_returned;
 
             }
 
+        }
 
+        if ($damage >  $defendingUser->health) {
+            $damage = $defendingUser->health;
         }
 
         $defendingUser->health -= $damage;
         $defendingUser->save();
+
+
 
         $attackingUser->energy -= 7;
         $attackingUser->save();

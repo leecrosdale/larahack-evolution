@@ -29,7 +29,7 @@ class LocationController extends Controller
             $user->location_id = $location->id;
             $user->energy -= $travel_cost;
             $user->save();
-            return redirect(url('home'));
+            return redirect(url('locations'));
         }
 
         return back()->with(['errors' => ['You don\'t have enough energy']]);
