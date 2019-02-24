@@ -76,11 +76,11 @@ class UserController extends Controller
         }
 
         // Damage Calc
-        $damage = ($attackingUser->strength * $attackingUser->energy) - ($attackingUser->stamina * $defendingUser->energy);
+        $damage = ($attackingUser->strength + $attackingUser->energy * $attackingUser->level) - ($defendingUser->stamina + $defendingUser->energy * $defendingUser->level);
 
         if ($damage < 0) {
 
-            $damage_lost = ($damage/2) * -1;
+            $damage_lost = ($damage/4) * -1;
 
             if ($damage_lost > $attackingUser->health) { $damage_lost = $attackingUser->health; }
 
@@ -100,7 +100,7 @@ class UserController extends Controller
             // Chance for defender to hit back
             if (random_int(0,100) > 98) {
 
-                $damage_returned = ($defendingUser->strength * $defendingUser->energy) - ($attackingUser->stamina * $attackingUser->energy) / 2;
+                $damage_returned = ($defendingUser->strength + $defendingUser->energy * $defendingUser->level) - ($attackingUser->stamina + $defendingUser->energy * $defendingUser->level) / 2;
                 $message .= 'but ' . $defendingUser->avatar_name . ' attacked back with ' . $damage_returned;
 
 
