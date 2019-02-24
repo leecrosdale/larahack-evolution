@@ -40,10 +40,10 @@
                                             {{ $userBuilding->level }}
                                         </td>
                                         <td>
-                                            {{ $userBuilding->health }} / {{ $userBuilding->max_health }}
+                                            {{ $userBuilding->location->name }}
                                         </td>
                                         <td>
-                                            {{ $userBuilding->location->name }}
+                                            {{ $userBuilding->health }} / {{ $userBuilding->max_health }}
                                         </td>
                                         <td>
                                             {{ $userBuilding->next_work_time }}

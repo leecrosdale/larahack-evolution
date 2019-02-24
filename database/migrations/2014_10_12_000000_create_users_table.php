@@ -29,6 +29,8 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('max_health')->default(100);
             $table->unsignedInteger('strength')->default(1);
             $table->unsignedInteger('stamina')->default(1);
+            $table->unsignedInteger('energy')->default(10);
+            $table->unsignedInteger('max_energy')->default(10);
 
             $table->unsignedInteger('location_id');
             $table->unsignedInteger('clan_id')->nullable();
