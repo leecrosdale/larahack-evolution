@@ -9,6 +9,8 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
         <!-- Styles -->
         <style>
             html, body {
@@ -68,7 +70,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}">Dashboard</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -88,6 +90,38 @@
                     <a href="https://github.com/leecrosdale/larahack-evolution">GitHub</a>
                     <a href="https://larahack.com">Built for LaraHack #3</a>
                 </div>
+
+                <br/><hr/><br/>
+
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">Leaderboard</div>
+
+                            <div class="card-body table-responsive">
+
+                                <table class="table table-striped ">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Level</th>
+                                        <th>Experience</th>
+                                    </tr>
+                                    @foreach (\App\User::orderBy('level','DESC')->get() as $user)
+                                            <tr>
+                                                <td>{{ $user->avatar_name }}</td>
+                                                <td>{{ $user->level }}</td>
+                                                <td>{{ $user->experience }}</td>
+                                            </tr>
+                                    @endforeach
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
             </div>
         </div>
     </body>
