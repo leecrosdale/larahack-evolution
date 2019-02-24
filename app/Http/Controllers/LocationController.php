@@ -15,7 +15,7 @@ class LocationController extends Controller
      */
     public function index()
     {
-        $locations = Location::with('users')->get();
+        $locations = Location::with('alive_users')->get();
         return view('locations.index')->withLocations($locations);
     }
 

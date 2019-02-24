@@ -51,14 +51,17 @@
                                                                 <td>
                                                                     <button class="btn btn-success" disabled="disabled">Message</button>
                                                                 </td>
-                                                                <td>
-                                                                    <button class="btn btn-secondary" disabled="disabled">Trade</button>
-                                                                </td>
-                                                                <td>
-                                                                    <a href="{{ route('user.attack', $user) }}">
-                                                                        <button class="btn btn-danger">Attack</button>
-                                                                    </a>
-                                                                </td>
+
+                                                                @if (\Illuminate\Support\Facades\Auth::user()->location_id === $location->id)
+                                                                    <td>
+                                                                        <button class="btn btn-secondary" disabled="disabled">Trade</button>
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="{{ route('user.attack', $user) }}">
+                                                                            <button class="btn btn-danger">Attack</button>
+                                                                        </a>
+                                                                    </td>
+                                                                @endif
                                                             </tr>
 
 

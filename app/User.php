@@ -16,7 +16,8 @@ class User extends Authenticatable
         'last_login',
         'last_sleep',
         'last_train',
-        'last_heal'
+        'last_heal',
+        'last_attack'
     ];
 
     /**
@@ -46,7 +47,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $appends = ['supplies_total','can_train', 'can_heal'];
+    protected $appends = ['supplies_total','can_train', 'can_heal', 'can_attack'];
 
     public function getSuppliesTotalAttribute() {
         $supplies = [];
@@ -143,6 +144,20 @@ class User extends Authenticatable
                 return false;
             }
         }
+
+        return true;
+
+    }
+
+    public function getCanAttackAttribute() {
+
+        if ($this->last_attack) {
+            if (Carbon::now()->diffInMinutes($this->last_attack) <= 5) {
+                return false;
+            }
+        }
+
+        if ($this->energy < 7) return false;
 
         return true;
 

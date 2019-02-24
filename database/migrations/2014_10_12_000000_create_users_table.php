@@ -34,6 +34,7 @@ class CreateUsersTable extends Migration
             $table->dateTime('last_sleep')->nullable();
             $table->dateTime('last_heal')->nullable();
             $table->dateTime('last_train')->nullable();
+            $table->dateTime('last_attack')->nullable();
 
             $table->unsignedInteger('location_id');
             $table->unsignedInteger('clan_id')->nullable();

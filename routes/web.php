@@ -40,7 +40,7 @@ Route::group(['middleware' => ['web','auth', 'check.level', 'check.alive']], fun
 
     Route::get('user/sleep', 'UserController@sleep')->name('user.sleep');
     Route::get('user/heal', 'UserController@heal')->name('user.heal');
-    Route::get('user/attack/{user}', 'UserController@attack')->name('user.attack');
+    Route::get('user/{user}/attack', 'UserController@attack')->name('user.attack');
     Route::get('train/{type}/{amount}', 'UserController@train')->name('user.train');
 
 });

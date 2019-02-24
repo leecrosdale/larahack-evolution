@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\TrainingType;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,8 +50,71 @@ class UserController extends Controller
         $user->health = $user->max_health;
         $user->last_heal = Carbon::now()->toDateTimeString();
         $user->save();
+
         return back()->with(['success' => ['You feel more healthy']]);
 
+    }
+
+    public function attack(User $user) {
+
+        $defendingUser = $user;
+        $attackingUser = Auth::user();
+
+        if ($defendingUser->location_id != $attackingUser->location_id) {
+            return back()->with(['errors' => [$defendingUser->avatar_name . ' is not in ' . $attackingUser->location->name . ' anymore!']]);
+        }
+
+        if ($defendingUser->health === 0) {
+            return back()->with(['errors' => [$defendingUser->avatar_name . ' is dead!']]);
+        }
+
+        if (!$attackingUser->canAttack) {
+
+            if ($attackingUser->energy < 7)  return back()->with(['errors' => ['You need at least 7 energy to attack!']]);
+
+            return back()->with(['errors' => ['You can attack again in ' . $attackingUser->last_attack->addMinutes(5)->diffForHumans()]]);
+        }
+
+        // Damage Calc
+        $damage = ($attackingUser->strength * $attackingUser->energy) - ($attackingUser->stamina * $defendingUser->energy);
+
+        if ($damage < 0) {
+
+            $damage_lost = $damage/2;
+
+            $attackingUser->energy -= 7;
+            $attackingUser->health -= $damage_lost;
+            $attackingUser->save();
+
+            return back()->with(['errors' => ['You weren\'t strong enough to damage ' . $defendingUser->avatar_name . ' and lost ' . $damage_lost . ' health' ]]);
+        }
+
+        $message = 'Attacked ' . $defendingUser->avatar_name . ' for ' . $damage . ' damage';
+
+        if ($damage > $defendingUser->health) {
+            $message .= ', killing them!';
+        } else {
+
+            // Chance for defender to hit back
+            if (random_int(0,100) > 98) {
+
+                $damage_returned = ($defendingUser->strength * $defendingUser->energy) - ($attackingUser->stamina * $attackingUser->energy) / 2;
+                $message .= 'but ' . $defendingUser->avatar_name . ' attacked back with ' . $damage_returned;
+
+                $attackingUser->health -= $damage_returned;
+
+            }
+
+
+        }
+
+        $defendingUser->health -= $damage;
+        $defendingUser->save();
+
+        $attackingUser->energy -= 7;
+        $attackingUser->save();
+
+        return back()->with(['success' => [$message]]);
 
     }
 
