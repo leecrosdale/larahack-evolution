@@ -13,7 +13,11 @@
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        You can retrain in {{ Auth::user()->last_train->addMinutes(15)->diffForHumans() }}
+                                        @if (\Illuminate\Support\Facades\Auth::user()->energy === 0)
+                                            You are out of energy! <a href="{{route('user.sleep')}}">Try to sleep</a>
+                                        @else
+                                            You can retrain in {{ Auth::user()->last_train->addMinutes(15)->diffForHumans() }}
+                                        @endif
                                     </div>
                                 </div>
                             </div>

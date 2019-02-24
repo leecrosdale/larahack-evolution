@@ -133,8 +133,7 @@ class User extends Authenticatable
             }
         }
 
-        return true;
-
+        return $this->energy !== 0;
     }
 
     public function getCanHealAttribute() {
