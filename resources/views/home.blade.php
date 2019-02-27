@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('head')
+    <meta http-equiv="refresh" content="5">
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
