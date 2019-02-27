@@ -25,12 +25,12 @@ class CreateUsersTable extends Migration
             // Stats
             $table->unsignedInteger('level')->default(0);
             $table->unsignedInteger('experience')->default(0);
-            $table->unsignedInteger('health')->default(100);
-            $table->unsignedInteger('max_health')->default(100);
+            $table->unsignedInteger('health')->default(500);
+            $table->unsignedInteger('max_health')->default(500);
             $table->unsignedInteger('strength')->default(1);
             $table->unsignedInteger('stamina')->default(1);
-            $table->unsignedInteger('energy')->default(10);
-            $table->unsignedInteger('max_energy')->default(10);
+            $table->unsignedInteger('energy')->default(100);
+            $table->unsignedInteger('max_energy')->default(100);
             $table->dateTime('last_sleep')->nullable();
             $table->dateTime('last_heal')->nullable();
             $table->dateTime('last_train')->nullable();

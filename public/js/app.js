@@ -1899,6 +1899,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {},
   data: function data() {
@@ -1906,10 +1910,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     health: function health() {
-      return this.user.health < this.user.max_health / 3;
+      return this.user.health !== this.user.max_health;
     },
-    energy: function energy(value) {
-      return this.user.energy > value;
+    energy: function energy() {
+      return this.user.energy !== this.user.max_energy;
     }
   },
   computed: {
@@ -37128,7 +37132,7 @@ var render = function() {
       _c("tr", [
         _c("td", [
           _vm._v("Energy  "),
-          !_vm.energy(2)
+          _vm.energy()
             ? _c("a", { attrs: { href: "/user/sleep" } }, [
                 _c("button", { staticClass: "btn btn-dark" }, [_vm._v("Sleep")])
               ])
@@ -37160,7 +37164,20 @@ var render = function() {
       _c("tr", [
         _c("td", [_vm._v("Experience")]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.user.experience))])
+        _c("td", [
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.user.experience) +
+              " / " +
+              _vm._s(_vm.user.level * 36) +
+              "\n                "
+          ),
+          _c("progress", {
+            staticClass: "nav-link",
+            attrs: { id: "exp", max: _vm.user.level * 36 },
+            domProps: { value: _vm.user.experience }
+          })
+        ])
       ]),
       _vm._v(" "),
       _c("tr", [

@@ -14,12 +14,10 @@ class UserController extends Controller
 
         $user = Auth::user();
 
-
-
         if ($user->last_sleep) {
 
             if (Carbon::now()->diffInDays($user->last_sleep) === 0) {
-                return back()->with(['errors' => ['You can only sleep once every 24 hours - Last sleep was ' . $user->last_sleep->diffForHumans() ]]);
+                return back()->with(['errors' => ['You can only sleep once every hour - Last sleep was ' . $user->last_sleep->diffForHumans() ]]);
             }
 
         }
@@ -42,7 +40,7 @@ class UserController extends Controller
         if ($user->last_heal) {
 
             if (Carbon::now()->diffInDays($user->last_heal) === 0) {
-                return back()->with(['errors' => ['You can only heal once every 24 hours - Last heal was ' . $user->last_heal->diffForHumans() ]]);
+                return back()->with(['errors' => ['You can only heal once every hour - Last heal was ' . $user->last_heal->diffForHumans() ]]);
             }
 
         }
@@ -135,8 +133,8 @@ class UserController extends Controller
         $user = Auth::user();
 
         if ($user->last_train) {
-            if (Carbon::now()->diffInMinutes($user->last_train) <= 15) {
-                return back()->with(['errors' => ['You can only train once every 15 minutes - Last train was ' . $user->last_train->diffForHumans() ]]);
+            if (Carbon::now()->diffInMinutes($user->last_train) <= 10) {
+                return back()->with(['errors' => ['You can only train once every 10 minutes - Last train was ' . $user->last_train->diffForHumans() ]]);
             }
         }
 
@@ -152,7 +150,7 @@ class UserController extends Controller
             break;
         }
 
-        $amount = (int) $energy_amount * random_int(1,4) / 2;
+        $amount = (int) $energy_amount / random_int(1,10);
 
         $user->{$type} += $amount;
 
