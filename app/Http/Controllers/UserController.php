@@ -16,7 +16,7 @@ class UserController extends Controller
 
         if ($user->last_sleep) {
 
-            if (Carbon::now()->diffInDays($user->last_sleep) === 0) {
+            if (Carbon::now()->diffInHours($user->last_sleep) <= 0) {
                 return back()->with(['errors' => ['You can only sleep once every hour - Last sleep was ' . $user->last_sleep->diffForHumans() ]]);
             }
 
