@@ -21,7 +21,8 @@
         "sass": "^1.21.0",
         "sass-loader": "^7.1.0",
         "vue": "^2.5.17",
-        "vue-template-compiler": "^2.6.10"
+        "vue-template-compiler": "^2.6.10",
+        "querystringify": ">=2.0.0"
     },
     "dependencies": {
         "vuejs-countdown-timer": "^2.1.1",
