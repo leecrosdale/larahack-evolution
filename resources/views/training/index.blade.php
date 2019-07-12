@@ -26,7 +26,7 @@
 
                     @php
 
-                    $elements = ['strength','stamina','energy','health']
+                    $elements = ['strength','stamina']
 
                     @endphp
 

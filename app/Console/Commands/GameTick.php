@@ -3,9 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Repository\Work;
+use App\User;
 use App\UserBuilding;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class GameTick extends Command
 {
@@ -40,13 +42,9 @@ class GameTick extends Command
      */
     public function handle()
     {
-        $buildings = UserBuilding::where('next_work', '<=', Carbon::now()->toDateTimeString())->orWhere('next_work', null)->get();
+       $users = User::where('energy', '<', DB::raw('max_energy'))->get();
 
-        $work = new Work();
-
-        foreach ($buildings as $building) {
-            $work->doWork($building, $building->user);
-        }
+       dd($users);
 
     }
 }

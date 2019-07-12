@@ -38,8 +38,7 @@ class Work
 
         $user->give_exp(2 * $userBuilding->level);
 
-
-        $userBuilding->next_work = Carbon::now()->addMinutes($userBuilding->level + 1);
+        $userBuilding->next_work = Carbon::now()->addSeconds($userBuilding->level + random_int(1,10));
         $userBuilding->save();
 
     }

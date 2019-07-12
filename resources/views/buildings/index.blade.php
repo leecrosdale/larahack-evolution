@@ -41,6 +41,16 @@
                                         </td>
                                         <td>
                                             {{ $userBuilding->location->name }}
+
+                                            @if ($userBuilding->location->id !== Auth::user()->location_id)
+                                                -
+                                                <a href="{{ route('location.travel', $userBuilding->location->id) }}">Travel</a>
+                                                @php
+                                                    $distance = $userBuilding->location->id  - Auth::user()->location_id;
+                                                    $travel_cost = $distance < 0 ? $distance * -1 : $distance;
+                                                @endphp
+                                                ({{ $travel_cost }} Energy)
+                                            @endif
                                         </td>
                                         <td>
                                             {{ $userBuilding->health }} / {{ $userBuilding->max_health }}
